@@ -5,6 +5,5 @@
 
 ### 参考链接
 
-https://docs.python.org/3/using/index.html
-
-
+> https://docs.python.org/3/using/index.html
+> https://pypi.python.org/
