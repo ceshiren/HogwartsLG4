@@ -10,6 +10,7 @@ from selenium.webdriver.common.by import By
 class TestWX:
     def setup(self):
         option = Options()
+        # 注意 9222 端口要与命令行启动的端口保持一致 --remote-debugging-port=9222
         option.debugger_address = "127.0.0.1:9222"
         self.driver = webdriver.Chrome(options=option)
 
