@@ -21,3 +21,7 @@ class TestTestcase():
         element = self.driver.find_element(By.LINK_TEXT, "所有分类")
         result = element.get_attribute("class")
         assert 'active' == result
+
+    def test_wx(self):
+        self.driver.get("https://work.weixin.qq.com/wework_admin/frame")
+        sleep(10)
