@@ -4,6 +4,7 @@ from time import sleep
 
 from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
+from appium.webdriver.webdriver import WebDriver
 
 
 class TestWX:
@@ -50,3 +51,31 @@ class TestWX:
         assert result == "添加成功"
         # sleep(2)
         # print(self.driver.page_source)
+
+    def test_delcontact(self):
+        name = "aaaa"
+        self.driver.find_element(MobileBy.XPATH, "//*[@text='通讯录']").click()
+        # self.driver.find_element(MobileBy.ID, "com.tencent.wework:id/gq_").click()
+        self.driver.find_element(MobileBy.XPATH,
+                                 "//android.widget.RelativeLayout/android.widget.LinearLayout[2]/android.widget.RelativeLayout[1]/android.widget.TextView").click()
+        self.driver.find_element(MobileBy.ID, "com.tencent.wework:id/ffq").send_keys(name)
+        sleep(2)
+        eles = self.driver.find_elements(MobileBy.XPATH, f"//*[@text='{name}']")
+        beforenum = len(eles)
+        if beforenum < 2:
+            print("没有可删除的人员")
+            return
+        eles[1].click()
+        self.driver.find_element(MobileBy.ID, "com.tencent.wework:id/gq0").click()
+        self.driver.find_element(MobileBy.XPATH, f"//*[@text='编辑成员']").click()
+        # self.driver.find_element(MobileBy.XPATH, f"//*[@text='删除成员']").click()
+        self.driver.find_element(MobileBy.ANDROID_UIAUTOMATOR,
+                                 'new UiScrollable(new UiSelector()'
+                                 '.scrollable(true).instance(0))'
+                                 '.scrollIntoView(new UiSelector()'
+                                 '.text("删除成员").instance(0));').click()
+        self.driver.find_element(MobileBy.XPATH, f"//*[@text='确定']").click()
+        sleep(2)
+        eles1 = self.driver.find_elements(MobileBy.XPATH, f"//*[@text='{name}']")
+        afternum = len(eles1)
+        assert afternum == beforenum - 1
