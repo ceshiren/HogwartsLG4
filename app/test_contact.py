@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import logging
 from time import sleep
 
 from appium import webdriver
@@ -23,12 +24,15 @@ class TestWX:
         self.driver.quit()
 
     def test_contact(self):
+        logging.basicConfig(level=logging.INFO)
         name = "hogwarts_00003"
         gender = "男"
         phonenum = "13812121214"
         # 点击【通讯录】
+
         self.driver.find_element(MobileBy.XPATH, "//*[@text='通讯录']").click()
         # 点击【添加成员】
+
         self.driver.find_element(MobileBy.ANDROID_UIAUTOMATOR,
                                  'new UiScrollable(new UiSelector()'
                                  '.scrollable(true).instance(0))'
