@@ -35,8 +35,12 @@ class TestDemo:
                 driver.get(url)
 
             if 'find_element' in step:
-                by = step.get("find_element")[0]
-                locator = step.get("find_element")[1]
+                if isinstance(step.get("find_element"), list):
+                    by = step.get("find_element")[0]
+                    locator = step.get("find_element")[1]
+                elif isinstance(step.get("find_element"), dict):
+                    by = step.get("find_element")['by']
+                    locator = step.get("find_element")['value']
                 current_element = driver.find_element(by, locator)
 
             if 'click' in step:

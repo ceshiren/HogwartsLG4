@@ -11,10 +11,14 @@ steps:
   - webdriver:
       browser: chrome
   #      remote-debugging-port: 4400
+# {'webdriver': {'browser': 'chrome', 'remote-debugging-port': '4400' }}
   - get: https://ceshiren.com/
+#  - find_element:
+#      - id
+#      - search-button
   - find_element:
-      - id
-      - search-button
+      by: id
+      value: search-button
   - click: []
   - find_element: [id,  search-term]
   - send_keys: ${data}
