@@ -1,0 +1,27 @@
+data:
+  - appium
+  - "selenium"
+  - 'requests'
+  - 测试开发
+  - 性能测试
+# { "data": ["appium", "selenium", "requests"] }
+# {'data': ['appium', 'selenium', 'requests']}
+
+steps:
+  - webdriver:
+      browser: chrome
+  #      remote-debugging-port: 4400
+  - get: https://ceshiren.com/
+  - find_element:
+      - id
+      - search-button
+  - click: []
+  - find_element: [id,  search-term]
+  - send_keys: ${data}
+
+
+
+#  driver=webdriver.Chrome()
+#  driver.get('https://ceshiren.com/')
+#  driver.find_element(By.ID, 'search-button').click()
+#  driver.find_element(By.ID, 'search-term').send_keys(keyword)
