@@ -1,9 +1,11 @@
 data:
-  - appium
-  - "selenium"
-  - 'requests'
-  - 测试开发
-  - 性能测试
+#  - appium
+  keyword: [appium, selenium]
+
+#  - "selenium"
+#  - 'requests'
+#  - 测试开发
+#  - 性能测试
 # { "data": ["appium", "selenium", "requests"] }
 # {'data': ['appium', 'selenium', 'requests']}
 
@@ -11,17 +13,21 @@ steps:
   - webdriver:
       browser: chrome
   #      remote-debugging-port: 4400
-# {'webdriver': {'browser': 'chrome', 'remote-debugging-port': '4400' }}
+  # {'webdriver': {'browser': 'chrome', 'remote-debugging-port': '4400' }}
   - get: https://ceshiren.com/
-#  - find_element:
-#      - id
-#      - search-button
+  #  - find_element:
+  #      - id
+  #      - search-button
   - find_element:
       by: id
       value: search-button
   - click: []
   - find_element: [id,  search-term]
   - send_keys: ${data}
+  - find_element: [css,  ".topic .first-line"]
+  - get_attribute: text
+  - var: { element_text: "${return}" }
+  - assert_in: ["${data}", "${element_text}"]
 
 
 
