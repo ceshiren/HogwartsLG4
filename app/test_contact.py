@@ -57,14 +57,21 @@ class TestWX:
         # print(self.driver.page_source)
 
     def test_delcontact(self):
-        name = "aaaa"
+        name = "hogwarts"
         self.driver.find_element(MobileBy.XPATH, "//*[@text='通讯录']").click()
         # self.driver.find_element(MobileBy.ID, "com.tencent.wework:id/gq_").click()
         self.driver.find_element(MobileBy.XPATH,
                                  "//android.widget.RelativeLayout/android.widget.LinearLayout[2]/android.widget.RelativeLayout[1]/android.widget.TextView").click()
         self.driver.find_element(MobileBy.ID, "com.tencent.wework:id/ffq").send_keys(name)
-        sleep(2)
-        eles = self.driver.find_elements(MobileBy.XPATH, f"//*[@text='{name}']")
+        sleep(5)
+        # eles = self.driver.find_elements(MobileBy.XPATH, f"//*[@text='{name}']")
+        eles = self.driver.find_elements(MobileBy.ANDROID_UIAUTOMATOR,
+                                         'new UiScrollable(new UiSelector()'
+                                         '.scrollable(true).instance(0))'
+                                         '.scrollIntoView(new UiSelector()'
+                                         f'.text("{name}").instance(0));')
+        print(eles)
+        print(len(eles))
         beforenum = len(eles)
         if beforenum < 2:
             print("没有可删除的人员")
